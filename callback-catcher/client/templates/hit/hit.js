@@ -1,6 +1,6 @@
 Template.hits.helpers({
 	hits: function(){
-		return  Hits.find({}, {sort: {time: -1}});
+		return  Hits.find({}, {sort: {time: -1},limit: 10});
 	}
 });
 
