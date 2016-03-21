@@ -8,23 +8,25 @@
 		}, 
 
 		{
-			"path": "app",
-			"file_include_patterns": ["*.js"],
+			"name": "Meteor",
+			"path": "callback-catcher",
+			"file_include_patterns": ["*.*"],
+			"folder_exclude_patterns": [".meteor"],
 		},
 
-		{
-			"path": "scripts",
-			"file_include_patterns": ["*.js", "*.coffee"],
-		},
+		// {
+		// 	"path": "scripts",
+		// 	"file_include_patterns": ["*.js", "*.coffee"],
+		// },
 
-		{
-			"path": "specs/",
-			"name": "specs",
-			"file_include_patterns": [
-				"*.coffee",
-				"*fixture*",
-				// "*.disabled"
-			]
-		},
+		// {
+		// 	"path": "specs/",
+		// 	"name": "specs",
+		// 	"file_include_patterns": [
+		// 		"*.coffee",
+		// 		"*fixture*",
+		// 		// "*.disabled"
+		// 	]
+		// },
 	]
 }
