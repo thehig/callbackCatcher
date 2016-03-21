@@ -1,0 +1,19 @@
+<template name="hits">
+	<h2>Hits</h2>
+	<ul>
+	{{#each hits}}
+		<li>
+		{{> entry}}
+		</li>
+	{{/each}}
+	</ul>
+</template>
+
+<template name="entry">
+	<div>
+		<p>Url {{url}}</p>
+		<p>Verb {{action}}</p>
+		<p>Headers {{headers}}</p>
+		{{#if body}}<p>Body {{body}}</p>{{/if}}
+	</div>
+</template>

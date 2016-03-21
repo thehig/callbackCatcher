@@ -6,67 +6,42 @@ Router.route('/', function() {
 	this.render('Home');
 });
 
+function insert(verb, request){
+	console.log(verb + " " + request.url);
+	Hits.insert({
+		"time": new Date(),
+		"action": verb,
+		"url": request.url,
+		"headers": request.headers,
+		"body": request.body,
+	});
+}
+
+function respond(response){	
+	response.setHeader('access-control-allow-origin', '*');
+	response.statusCode = 200;
+	response.end();
+}
+
 if (Meteor.isServer) {
 
 	Router.route('/hits/(.*)', {
 			where: "server"
 		})
 		.get(function() {
-			w("get");
-
-			Hits.insert({
-				"action": 'GET',
-				"url": this.request.url,
-				"headers": this.request.headers,
-				"body": this.request.body,
-			});
-
-			this.response.setHeader('access-control-allow-origin', '*');
-			this.response.statusCode = 200;
-			this.response.end();
+			insert("get", this.request);
+			respond(this.response);
 		})
 		.post(function() {
-			w("post");
-
-
-			Hits.insert({
-				"action": 'POST',
-				"url": this.request.url,
-				"headers": this.request.headers,
-				"body": this.request.body,
-			});
-			this.response.setHeader('access-control-allow-origin', '*');
-			this.response.statusCode = 200;
-			this.response.end();
-			// If a POST request is made, create the user's profile.
+			insert("post", this.request);
+			respond(this.response);
 		})
 		.put(function() {
-			w("put");
-
-			Hits.insert({
-				"action": 'PUT',
-				"url": this.request.url,
-				"headers": this.request.headers,
-				"body": this.request.body,
-			});
-			this.response.setHeader('access-control-allow-origin', '*');
-			this.response.statusCode = 200;
-			this.response.end();
-			// If a PUT request is made, either update the user's profile or
-			// create it if it doesn't already exist.
+			insert("put", this.request);
+			respond(this.response);
 		})
 		.delete(function() {
-			w("del");
-
-			Hits.insert({
-				"action": 'DELETE',
-				"url": this.request.url,
-				"headers": this.request.headers,
-				"body": this.request.body,
-			});
-			this.response.setHeader('access-control-allow-origin', '*');
-			this.response.statusCode = 200;
-			this.response.end();
-			// If a DELETE request is made, delete the user's profile.
+			insert("del", this.request);
+			respond(this.response);
 		});
 }
