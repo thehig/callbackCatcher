@@ -10,13 +10,57 @@
 </template>
 
 <template name="entry" >
-	<div class={{entryClass}}>
+	<!-- <div class={{entryClass}}>
 		<p>Time:{{time}}</p>
 		<p>Url {{url}}</p>
 		<p>Verb {{action}}</p>
 		<p>Headers {{headers}}</p>
 		{{#if body}}<p>Body {{body}}</p>{{/if}}
-	</div>
+	</div> -->
+
+
+	<div class="row {{entryClass}}" >
+    <div class="col-md-12">
+        <ul class="nav nav-stacked" id="accordion1">
+            <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#firstLink{{_id}}">Time</a>
+
+                <ul id="firstLink{{_id}}" class="collapse">
+                    <li>{{time}}</li>
+                </ul>
+              
+            </li>
+            <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#secondLink{{_id}}">URL</a>
+
+                <ul id="secondLink{{_id}}" class="collapse">
+                    <li>{{url}}</li>
+                </ul>
+              
+            </li>
+            <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#thirdLink{{_id}}">Verb</a>
+
+                <ul id="thirdLink{{_id}}" class="collapse">
+                    <li>{{action}}</li>
+                </ul>
+              
+            </li>
+             <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#forthLink{{_id}}">Headers</a>
+
+                <ul id="forthLink{{_id}}" class="collapse">
+                    <li>{{headers}}</li>
+                </ul>
+              
+            </li>
+            {{#if body}}
+            <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#fifthLink{{_id}}">Body</a>
+                <ul id="fifthLink{{_id}}" class="collapse">
+                    <li>{{body}}</li>
+                </ul>    
+            </li>
+            {{/if}}
+        </ul>
+    </div>
+    
+</div>
 </template>
 
 
