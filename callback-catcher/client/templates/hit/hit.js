@@ -23,5 +23,8 @@ Template.entry.helpers({
 	},
 	time: function() {
 		return moment(this.time).fromNow();
+	},
+	entryClass:function(){
+		return "verb-"+this.action;
 	}
 });

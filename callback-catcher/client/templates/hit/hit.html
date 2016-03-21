@@ -9,8 +9,8 @@
 	</ul>
 </template>
 
-<template name="entry">
-	<div>
+<template name="entry" >
+	<div class={{entryClass}}>
 		<p>Time:{{time}}</p>
 		<p>Url {{url}}</p>
 		<p>Verb {{action}}</p>
@@ -18,3 +18,8 @@
 		{{#if body}}<p>Body {{body}}</p>{{/if}}
 	</div>
 </template>
+
+
+
+
+
