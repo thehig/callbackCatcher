@@ -19,18 +19,18 @@ ul, ol {
 /*.panel{
     margin-bottom: 0px;
 }*/
-.panel {
+/*.panel {
 	margin-bottom: 0px;
 }
 .panel-default > .panel-heading{
 	padding-bottom: 25px;
-}
-.panel-heading:hover { 
+}*/
+/*.panel-heading:hover { 
     background-color: #eee;
-}
-.panel-heading >a {
+}*/
+/*.panel-heading >a {
     text-decoration: none;
-}
+}*/
 
 /*.col-md-12>li.panel{
 	padding-bottom: 10px;

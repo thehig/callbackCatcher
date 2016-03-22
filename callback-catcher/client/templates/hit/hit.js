@@ -26,7 +26,13 @@ Template.entry.helpers({
 		return moment(this.time).fromNow();
 	},
 	entryClass: function() {
-		return "verb-" + this.action;
+		switch(this.action.toLowerCase()){
+			case "get": return "panel-primary"; break;
+			case "put": return "panel-info"; break;
+			case "post": return "panel-warning"; break;
+			case "delete": return "panel-danger"; break;
+			default: return ""; break;
+		}
 	}
 });
 

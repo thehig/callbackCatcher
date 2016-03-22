@@ -1,31 +1,26 @@
 <template name="hits">
-	<h2>Hits</h2>
-	<ul class="nav nav-stacked" id="accordion">
-	{{#each hits}}
-		<li>
-		{{> entry}}
-		</li>
-	{{/each}}
-	</ul>
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+		{{#each hits}}
+			{{> entry}}
+		{{/each}}
+	</div>
 </template>
 
-<template name="entry" >
-	 <div class="row {{entryClass}}" >
-    <!-- <div class="col-md-12"> -->
-		<div class="panel panel-default">
-			<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#firstLink{{_id}}">
-				<!-- <a data-toggle="collapse" data-parent="#accordion1" href="#firstLink{{_id}}"> -->
-						<div class="col-md-6">
-							<strong >Time:</strong>{{time}} 
-						</div>
-						<div class="col-md-6 pull-right">
-							<strong>URL:</strong>{{url}} 
-						</div>
-						<!-- <strong>Action:</strong>{{action}} -->
-	            <!-- </a> -->
-			</div>
-			<div class="panel-body panel-collapse collapse" id="firstLink{{_id}}">
-				<div class="col-md-6">
+
+<template name="entry">
+	<div class="panel {{entryClass}}">
+		<div class="panel-heading" role="tab" id="panel-{{_id}}">
+			<h4 class="panel-title">
+				<div class="row" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}" aria-expanded="true" aria-controls="collapse-{{_id}}">
+					<p class="col-md-3">{{url}}</p>
+					<p class="col-md-3 pull-right">{{time}}</p>
+				</div>
+			</h4>
+		</div>
+
+		<div id="collapse-{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel-{{_id}}">
+			<div class="panel-body ">
+			<div class="col-md-6">
 					<strong>HEADERS:</strong>
 					<pre>{{json2html headers}}</pre>
 				</div>
@@ -41,9 +36,7 @@
 				{{/if}}
 			</div>
 		</div>
-     
-    
-</div>
+	</div>    
 </template>
 
 
