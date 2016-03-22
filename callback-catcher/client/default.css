@@ -24,3 +24,35 @@ ul, ol {
 	padding-bottom: 10px;
 	margin-bottom: 10px;
 }*/
+
+pre {
+    outline: 1px solid #ccc;
+    padding: 5px;
+    margin: 5px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.panel ul{
+	padding-left: 5px;
+}
+
+.string {
+    color: green;
+}
+
+.number {
+    color: darkorange;
+}
+
+.boolean {
+    color: blue;
+}
+
+.null {
+    color: magenta;
+}
+
+.key {
+    color: red;
+}

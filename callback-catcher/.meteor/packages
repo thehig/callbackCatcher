@@ -22,3 +22,5 @@ iron:router
 msavin:mongol
 momentjs:moment
 twbs:bootstrap
+miro:json2html
+zenorocha:clipboard
