@@ -21,53 +21,32 @@
 
 	<div class="row {{entryClass}}" >
     <div class="col-md-12">
-        <ul class="nav nav-stacked" id="accordion1">
-            <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#firstLink{{_id}}">Time</a>
+      <ul class="nav nav-stacked" id="accordion1">
+            <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#firstLink{{_id}}"><strong>Time:</strong>{{time}} &mdash; <strong>URL:</strong>{{url}} &mdash; <strong>Action:</strong>{{action}}</a>
 
                 <ul id="firstLink{{_id}}" class="collapse">
-                    <li>{{time}}</li>
-                </ul>
-              
-            </li>
-            <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#secondLink{{_id}}">URL</a>
-
-                <ul id="secondLink{{_id}}" class="collapse">
-                    <li>{{url}}</li>
-                </ul>
-              
-            </li>
-            <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#thirdLink{{_id}}">Verb</a>
-
-                <ul id="thirdLink{{_id}}" class="panel-collapse collapse ">
-                    <li>{{action}}</li>
-                </ul>
-              
-            </li>
-             <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#forthLink{{_id}}">Headers</a>
-
-                <ul id="forthLink{{_id}}" class="collapse">
-                    <li><pre>{{json2html headers}}</pre></li>
-                </ul>
-              
-            </li>
-            {{#if body}}
-            <li class="panel"> <a data-toggle="collapse" data-parent="#accordion1" href="#fifthLink{{_id}}">Body</a>
-                <ul id="fifthLink{{_id}}" class="collapse">
-                    <!-- Trigger -->
-					<button class="btn-copy-body-{{_id}}" data-clipboard-action="copy" data-clipboard-target="#pre{{_id}}">
+                	<strong>HEADERS:</strong>
+                     <li><pre>{{json2html headers}}</pre></li>
+                     {{#if body}} 
+                    <strong>BODY:</strong>
+                    <li>
+                    <button class="btn-copy-body-{{_id}}" data-clipboard-action="copy" data-clipboard-target="#pre{{_id}}">
 					    Copy to clipboard
 					</button>
 					<!-- Target to copy -->
-                    <li><pre id="pre{{_id}}">{{json2html body}}</pre></li>
+                    <pre id="pre{{_id}}">{{json2html body}}</pre>
+                    </li>
+                    {{/if}}
 
-                </ul>    
-            </li>
-            {{/if}}
+                </ul>
+              
+            </li>   
         </ul>
     </div>
     
 </div>
 </template>
+
 
 
 
