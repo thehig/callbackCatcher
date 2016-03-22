@@ -16,8 +16,20 @@ argin-bottom: 10px;
 ul, ol {
   list-style: none;
 }
-#accordion1 li.panel{
+/*.panel{
     margin-bottom: 0px;
+}*/
+.panel {
+	margin-bottom: 0px;
+}
+.panel-default > .panel-heading{
+	padding-bottom: 25px;
+}
+.panel-heading:hover { 
+    background-color: #eee;
+}
+.panel-heading >a {
+    text-decoration: none;
 }
 
 /*.col-md-12>li.panel{
@@ -33,9 +45,9 @@ pre {
     padding-left: 0px;
 }
 
-.panel ul{
+/*.panel ul{
 	padding-left: 5px;
-}
+}*/
 
 .string {
     color: green;

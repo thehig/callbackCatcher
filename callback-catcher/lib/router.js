@@ -1,5 +1,8 @@
 w = console.log;
 
+Router.configure({
+  layoutTemplate: 'layout'
+});
 
 Router.route('/', function() {
 	console.log("Render /");
