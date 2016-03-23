@@ -1,53 +1,4 @@
-.verb-post{
-	background-color:#ff944d;
-	padding: 10px;
-	margin-bottom: 10px;
-}
-
-.verb-get{
-	background-color:#84e184;
-	padding: 10px;
-	/*padding-bottom: 10px;
-argin-bottom: 10px;
-*/
-	margin-bottom: 10px;
-}
-
-ul, ol {
-  list-style: none;
-}
-/*.panel{
-    margin-bottom: 0px;
-}*/
-/*.panel {
-	margin-bottom: 0px;
-}
-.panel-default > .panel-heading{
-	padding-bottom: 25px;
-}*/
-/*.panel-heading:hover { 
-    background-color: #eee;
-}*/
-/*.panel-heading >a {
-    text-decoration: none;
-}*/
-
-/*.col-md-12>li.panel{
-	padding-bottom: 10px;
-	margin-bottom: 10px;
-}*/
-
-pre {
-    outline: 1px solid #ccc;
-    padding: 5px;
-    margin: 5px;
-    margin-left: 0px;
-    padding-left: 0px;
-}
-
-/*.panel ul{
-	padding-left: 5px;
-}*/
+// Color tags for json2html datatypes
 
 .string {
     color: green;
@@ -67,8 +18,4 @@ pre {
 
 .key {
     color: red;
-}
-
-.no-padding-left{
-	padding-left: 0px;
 }
