@@ -68,3 +68,7 @@ pre {
 .key {
     color: red;
 }
+
+.no-padding-left{
+	padding-left: 0px;
+}

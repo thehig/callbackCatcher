@@ -1,5 +1,9 @@
 <template name="hits">
-	{{>filterhits}}
+	<div class="row">
+		{{>filterhits}}
+		{{>searching}}
+	</div>
+	<br>
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
 		{{#each hits}}
 			{{> entry}}
@@ -41,26 +45,29 @@
 </template>
 
 <template name='filterhits'>
-	<div>
-	<label class="checkbox-inline">
-		Visibility filter:
-	</label>
-	<label class="checkbox-inline " >
-	  <input type="checkbox" name="get" checked> GET
-	</label>
-	<label class="checkbox-inline">
-	  <input type="checkbox" name="post" checked> POST
-	</label>
-	<label class="checkbox-inline">
-	  <input type="checkbox" name="put" checked> PUT
-	</label>
-	<label class="checkbox-inline">
-	  <input type="checkbox" name="delete" checked> DELETE
-	</label>
-	
-</div>
-	
+	<div class="col-md-6">
+		<label class="checkbox-inline no-padding-left">
+			<h4>Visibility filter:</h4>
+		</label>
+		<label class="checkbox-inline " >
+		  <input type="checkbox" name="get" checked> GET
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" name="post" checked> POST
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" name="put" checked> PUT
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" name="delete" checked> DELETE
+		</label>
+	</div>
 </template>
 
-
+<template name="searching">
+	 <div class="col-md-6">
+	 	 <input type="text" class="searchinput form-control" placeholder="Type here to filter by URL">
+	 </div>
+	
+</template>
 

@@ -2,8 +2,10 @@ Template.hits.helpers({
 	hits: function() {
 		return Hits.find({
 			action: {
-				$in: Session.get("visibilityFilter")
-			}
+				$in: Session.get("visibilityFilter") || ["get","post","put","delete"]
+			},
+		    url: { $regex: Session.get("searchingQuery") || ''} 
+	
 		}, {
 			sort: {
 				time: -1
@@ -12,6 +14,11 @@ Template.hits.helpers({
 		});
 	}
 });
+// Template.hits.onRendered(function(){
+// 	Session.set("visibilityFilter",["get","post","put","delete"]);
+// 	Session.set("searchingQuery","");
+
+// })
 
 Template.entry.helpers({
 	// this: Single HTTP Entry from DB
@@ -85,7 +92,29 @@ Template.filterhits.onRendered(function() {
 	// console.log("this:");
 	// console.log(this.findAll());
 	trackCheckboxes(this);
-})
+});
+
+Template.searching.onRendered(function() {
+	Session.set('searchingQuery', "");
+});
+
+Template.searching.events({
+	'keyup .searchinput': function(e, tpl) {
+		console.log(e.target.value);
+		var query = e.target.value;
+		// var cursor = query && query.length > 1 ? new RegExp(query): {};
+		Session.set('searchingQuery', query);
+
+
+
+		console.log("keyup");
+		// console.log
+		// var searchForm = form2js($('#searchFilter')[0]);
+		// console.log(searchForm);
+		// Session.set('searchFilter');
+	}
+});
+
 
 function trackCheckboxes(tpl) {
 	var checkboxes = tpl.findAll("input[type=checkbox]:checked");
@@ -93,7 +122,7 @@ function trackCheckboxes(tpl) {
 	var array = _.map(checkboxes, function(item) {
 		return item.name;
 	});
-	console.log("Array:"+array);
+	console.log("Array:" + array);
 	Session.set('visibilityFilter', array);
 
 }
