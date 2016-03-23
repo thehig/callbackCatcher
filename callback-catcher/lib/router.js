@@ -6,7 +6,7 @@ Router.configure({
 
 Router.route('/', function() {
 	console.log("Render /");
-	this.render('Home');
+	this.render('hits');
 });
 
 function insert(verb, request){
