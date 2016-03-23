@@ -1,6 +1,10 @@
 Template.hits.helpers({
 	hits: function() {
-		return Hits.find({}, {
+		return Hits.find({
+			action: {
+				$in: Session.get("visibilityFilter")
+			}
+		}, {
 			sort: {
 				time: -1
 			},
@@ -26,12 +30,22 @@ Template.entry.helpers({
 		return moment(this.time).fromNow();
 	},
 	entryClass: function() {
-		switch(this.action.toLowerCase()){
-			case "get": return "panel-primary"; break;
-			case "put": return "panel-info"; break;
-			case "post": return "panel-warning"; break;
-			case "delete": return "panel-danger"; break;
-			default: return ""; break;
+		switch (this.action.toLowerCase()) {
+			case "get":
+				return "panel-primary";
+				break;
+			case "put":
+				return "panel-info";
+				break;
+			case "post":
+				return "panel-warning";
+				break;
+			case "delete":
+				return "panel-danger";
+				break;
+			default:
+				return "";
+				break;
 		}
 	}
 });
@@ -56,3 +70,30 @@ Template.entry.onRendered(function() {
 		console.error('Trigger:', e.trigger);
 	});
 });
+
+
+Template.filterhits.events({
+	"click input": function(e, tpl) {
+		// console.log("input clicked");
+		// console.log(e);
+		// console.log(e.currentTarget);
+		trackCheckboxes(tpl);
+	}
+});
+
+Template.filterhits.onRendered(function() {
+	// console.log("this:");
+	// console.log(this.findAll());
+	trackCheckboxes(this);
+})
+
+function trackCheckboxes(tpl) {
+	var checkboxes = tpl.findAll("input[type=checkbox]:checked");
+	var actionsToDisolay = [];
+	var array = _.map(checkboxes, function(item) {
+		return item.name;
+	});
+	console.log("Array:"+array);
+	Session.set('visibilityFilter', array);
+
+}

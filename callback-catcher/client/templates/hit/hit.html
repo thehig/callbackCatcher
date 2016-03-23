@@ -1,4 +1,5 @@
 <template name="hits">
+	{{>filterhits}}
 	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
 		{{#each hits}}
 			{{> entry}}
@@ -39,8 +40,27 @@
 	</div>    
 </template>
 
-
-
+<template name='filterhits'>
+	<div>
+	<label class="checkbox-inline">
+		Visibility filter:
+	</label>
+	<label class="checkbox-inline " >
+	  <input type="checkbox" name="get" checked> GET
+	</label>
+	<label class="checkbox-inline">
+	  <input type="checkbox" name="post" checked> POST
+	</label>
+	<label class="checkbox-inline">
+	  <input type="checkbox" name="put" checked> PUT
+	</label>
+	<label class="checkbox-inline">
+	  <input type="checkbox" name="delete" checked> DELETE
+	</label>
+	
+</div>
+	
+</template>
 
 
 
