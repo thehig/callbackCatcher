@@ -45,7 +45,7 @@ if (Meteor.isServer) {
 			respond(this.response);
 		})
 		.delete(function() {
-			insert("del", this.request);
+			insert("delete", this.request);
 			respond(this.response);
 		});
 }

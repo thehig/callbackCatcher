@@ -46,7 +46,7 @@ Template.entry.helpers({
 	entryClass: function() {
 		switch (this.action.toLowerCase()) {
 			case "get":
-				return "panel-primary";
+				return "panel-success";
 				break;
 			case "put":
 				return "panel-info";
