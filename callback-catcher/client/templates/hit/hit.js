@@ -32,6 +32,7 @@ Template.entry.helpers({
 		return this.headers;
 	},
 	body: function() {
+		if(Object.keys(this.body).length <= 0) return undefined
 		return this.body;
 	},
 	// The HTTP Verb in uppercase
@@ -66,18 +67,48 @@ Template.entry.helpers({
 
 // Set up Copy to Clipboard. Print success and error messages to console
 Template.entry.onRendered(function() {
-	var btnName = ".btn-copy-body-" + this.data._id;
-	var clipboard = new Clipboard(btnName);
+	var btnCopyBody = ".btn-copy-body-" + this.data._id;
+	var btnCopyHeader = ".btn-copy-header-" + this.data._id;
+	var clipboardBody = new Clipboard(btnCopyBody);
+	var clipboardHeader = new Clipboard(btnCopyHeader);
 
-	clipboard.on('success', function(e) {
+	clipboardBody.on('success', function(e) {
+		console.info('Clipboard Success Action:', e.action);
+		console.log(e);
+		e.clearSelection();
+
+	});
+
+	clipboardBody.on('error', function(e) {
+		console.error('Clipboard Error Action:', e.action);
+		console.error('Clipboard Error Trigger:', e.trigger);
+		e.stopPropagation();
+	});
+
+	clipboardHeader.on('success', function(e) {
 		console.info('Clipboard Success Action:', e.action);
 		e.clearSelection();
 	});
 
-	clipboard.on('error', function(e) {
+	clipboardHeader.on('error', function(e) {
 		console.error('Clipboard Error Action:', e.action);
 		console.error('Clipboard Error Trigger:', e.trigger);
 	});
+});
+
+Template.entry.events({
+'click .delete-entry': function(e, tpl){
+    Hits.remove(this._id);
+    e.stopPropagation();
+  },
+  'click .copy-body': function(e, tpl){
+    // e.stopPropagation();
+  },
+  'click .copy-header': function(e, tpl){
+    // e.stopPropagation();
+    
+  }
+
 });
 
 // FilterHits Template

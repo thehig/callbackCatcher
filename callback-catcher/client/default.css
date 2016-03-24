@@ -19,3 +19,6 @@
 .key {
     color: red;
 }
+pre {
+	max-height:25em;
+}

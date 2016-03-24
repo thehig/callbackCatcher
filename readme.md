@@ -16,3 +16,4 @@ Need to examine a server-side callback but don't want to set up a server? Send y
 ##### Notes:
 
 * Search URLs are regexes, and can be complex
+* Click events on the entry controls opens/closes the accordion (the delete button does not however)
