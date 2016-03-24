@@ -1,4 +1,9 @@
+// Hits Template
+// =======================
+
 Template.hits.helpers({
+	// Returns the last 10 items from the dataset, sorted with newest first
+	// 	Filters using the visibilityFilter and searchingQuery session variables
 	hits: function() {
 		return Hits.find({
 			action: {
@@ -14,32 +19,34 @@ Template.hits.helpers({
 		});
 	}
 });
-// Template.hits.onRendered(function(){
-// 	Session.set("visibilityFilter",["get","post","put","delete"]);
-// 	Session.set("searchingQuery","");
 
-// })
+// Entry Template
+// =======================
 
+// Sanatize this (HTTP entry) for the template
 Template.entry.helpers({
-	// this: Single HTTP Entry from DB
-	// 	action, headers, body, url
+	// this: a single HTTP Entry from Hits collection
+	// 	{ action, headers, body, url }
+
 	headers: function() {
 		return this.headers;
 	},
 	body: function() {
-		// return JSON.stringify(this.body);
 		return this.body;
 	},
+	// The HTTP Verb in uppercase
 	action: function() {
 		return JSON.stringify(this.action.toUpperCase());
 	},
+	// Nice time elapsed (eg a few seconds ago)
 	time: function() {
 		return moment(this.time).fromNow();
 	},
+	// Convert the HTTP verb into a bootstrap color-tag
 	entryClass: function() {
 		switch (this.action.toLowerCase()) {
 			case "get":
-				return "panel-primary";
+				return "panel-success";
 				break;
 			case "put":
 				return "panel-info";
@@ -57,72 +64,54 @@ Template.entry.helpers({
 	}
 });
 
-
+// Set up Copy to Clipboard. Print success and error messages to console
 Template.entry.onRendered(function() {
-	//console.log(this);
-	// console.log(JSON.stringify(this.data));
 	var btnName = ".btn-copy-body-" + this.data._id;
-	// console.log(btnName);
 	var clipboard = new Clipboard(btnName);
-	clipboard.on('success', function(e) {
-		console.info('Action:', e.action);
-		// console.info('Text:', e.text);
-		// console.info('Trigger:', e.trigger);
 
+	clipboard.on('success', function(e) {
+		console.info('Clipboard Success Action:', e.action);
 		e.clearSelection();
 	});
 
 	clipboard.on('error', function(e) {
-		console.error('Action:', e.action);
-		console.error('Trigger:', e.trigger);
+		console.error('Clipboard Error Action:', e.action);
+		console.error('Clipboard Error Trigger:', e.trigger);
 	});
 });
 
+// FilterHits Template
+// =======================
+
+// Set visbilityFilter session variable to the array of names of the checked checkboxes
+function trackCheckboxes(tpl) {
+	var checkboxes = tpl.findAll("input[type=checkbox]:checked");
+	Session.set('visibilityFilter', _.map(checkboxes, function(item) {
+		return item.name;
+	}));
+}
 
 Template.filterhits.events({
 	"click input": function(e, tpl) {
-		// console.log("input clicked");
-		// console.log(e);
-		// console.log(e.currentTarget);
 		trackCheckboxes(tpl);
 	}
 });
 
 Template.filterhits.onRendered(function() {
-	// console.log("this:");
-	// console.log(this.findAll());
 	trackCheckboxes(this);
 });
 
+// Searching Template
+// =======================
+
+// Wipe the searchingQuery session variable when the template renders
 Template.searching.onRendered(function() {
 	Session.set('searchingQuery', "");
 });
 
+// Set the searchingQuery session variable when text is entered to .searchinput
 Template.searching.events({
 	'keyup .searchinput': function(e, tpl) {
-		console.log(e.target.value);
-		var query = e.target.value;
-		// var cursor = query && query.length > 1 ? new RegExp(query): {};
-		Session.set('searchingQuery', query);
-
-
-
-		console.log("keyup");
-		// console.log
-		// var searchForm = form2js($('#searchFilter')[0]);
-		// console.log(searchForm);
-		// Session.set('searchFilter');
+		Session.set('searchingQuery', e.target.value);
 	}
 });
-
-
-function trackCheckboxes(tpl) {
-	var checkboxes = tpl.findAll("input[type=checkbox]:checked");
-	var actionsToDisolay = [];
-	var array = _.map(checkboxes, function(item) {
-		return item.name;
-	});
-	console.log("Array:" + array);
-	Session.set('visibilityFilter', array);
-
-}

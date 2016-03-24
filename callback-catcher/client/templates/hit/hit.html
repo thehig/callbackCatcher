@@ -1,3 +1,4 @@
+<!-- Top-level template. List the entries from the dataset with search and filter -->
 <template name="hits">
 	<div class="row">
 		{{>filterhits}}
@@ -11,9 +12,12 @@
 	</div>
 </template>
 
-
+<!-- Template for a single HTTP action to be displayed inside a bootstrap accordian -->
 <template name="entry">
+	<!-- Accordian div, color coded by HTTP Verb -->
 	<div class="panel {{entryClass}}">
+
+		<!-- Panel Heading, displays URI and time -->
 		<div class="panel-heading" role="tab" id="panel-{{_id}}">
 			<h4 class="panel-title">
 				<div class="row" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}" aria-expanded="true" aria-controls="collapse-{{_id}}">
@@ -23,15 +27,19 @@
 			</h4>
 		</div>
 
+		<!-- Panel body, displays header and body of entry expected in JSON format -->
 		<div id="collapse-{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel-{{_id}}">
 			<div class="panel-body ">
-			<div class="col-md-6">
+				<div class="col-md-6">
 					<strong>HEADERS:</strong>
 					<pre>{{json2html headers}}</pre>
 				</div>
+
+				<!-- Don't display the body section if there isn't one -->
 	            {{#if body}} 
 				<div class="col-md-6">
 					<strong>BODY:</strong>
+					<!-- Copy to clipboard button-->
 					<button class="btn-copy-body-{{_id}}" data-clipboard-action="copy" data-clipboard-target="#pre{{_id}}">
 						Copy to clipboard
 					</button>
@@ -44,6 +52,7 @@
 	</div>    
 </template>
 
+<!-- Template for an inline-list of filter checkboxes -->
 <template name='filterhits'>
 	<div class="col-md-6">
 		<label class="checkbox-inline no-padding-left">
@@ -64,10 +73,10 @@
 	</div>
 </template>
 
+<!-- Template for the URI filter textbox -->
 <template name="searching">
 	 <div class="col-md-6">
 	 	 <input type="text" class="searchinput form-control" placeholder="Type here to filter by URL">
 	 </div>
-	
 </template>
 

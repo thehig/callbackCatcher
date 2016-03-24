@@ -8,6 +8,14 @@
 		}, 
 
 		{
+			"name": ".meteor",
+			"path": "callback-catcher/.meteor",
+			// "file_include_patterns": ["*.*"],
+			// "file_exclude_patterns": [".addToGit"],
+			// "folder_exclude_patterns": [".meteor"],
+		},
+
+		{
 			"name": "Meteor",
 			"path": "callback-catcher",
 			"file_include_patterns": ["*.*"],
