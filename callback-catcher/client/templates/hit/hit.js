@@ -106,10 +106,10 @@ Template.entry.events({
     e.stopPropagation();
   },
   'click .copy-body': function(e, tpl){
-    // e.stopPropagation();
+    e.stopPropagation();
   },
   'click .copy-header': function(e, tpl){
-    // e.stopPropagation();
+    e.stopPropagation();
     
   }
 
