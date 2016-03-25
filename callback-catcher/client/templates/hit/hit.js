@@ -16,6 +16,10 @@ Template.hits.helpers({
 				time: -1
 			},
 			limit: 10
+		}).map(function(hit, index){
+			// Need to know which item is first in the collection to expand accordian appropriately
+			hit.isFirst = (index === 0);
+			return hit;
 		});
 	}
 });

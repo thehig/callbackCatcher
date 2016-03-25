@@ -16,7 +16,6 @@
 <template name="entry">
 	<!-- Accordian div, color coded by HTTP Verb -->
 	<div class="panel {{entryClass}}">
-
 		<!-- Panel Heading, displays URI and time -->
 		<div class="panel-heading" role="tab" id="panel-{{_id}}">
 			<h4 class="panel-title">
@@ -41,7 +40,7 @@
 		</div>
 
 		<!-- Panel body, displays header and body of entry expected in JSON format -->
-		<div id="collapse-{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel-{{_id}}">
+		<div id="collapse-{{_id}}" class="panel-collapse {{#if isFirst}} in {{else}} collapse {{/if}}" role="tabpanel" aria-labelledby="panel-{{_id}}">
 			<div class="panel-body ">
 				<div class="{{#if body}} col-md-6{{else}} col-md-12{{/if}}">
 					<strong>HEADERS:</strong>
