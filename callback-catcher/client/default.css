@@ -1,3 +1,8 @@
+
+.word-wrap-break-word {
+	word-wrap: break-word;
+}
+
 // Color tags for json2html datatypes
 
 .string {
