@@ -1,0 +1,24 @@
+// Color tags for json2html datatypes
+
+.string {
+    color: green;
+}
+
+.number {
+    color: darkorange;
+}
+
+.boolean {
+    color: blue;
+}
+
+.null {
+    color: magenta;
+}
+
+.key {
+    color: red;
+}
+pre {
+	max-height:25em;
+}

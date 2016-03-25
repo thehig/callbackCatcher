@@ -1,19 +1,95 @@
+<!-- Top-level template. List the entries from the dataset with search and filter -->
 <template name="hits">
-	<h2>Hits</h2>
-	<ul>
-	{{#each hits}}
-		<li>
-		{{> entry}}
-		</li>
-	{{/each}}
-	</ul>
-</template>
-
-<template name="entry">
-	<div>
-		<p>Url {{url}}</p>
-		<p>Verb {{action}}</p>
-		<p>Headers {{headers}}</p>
-		{{#if body}}<p>Body {{body}}</p>{{/if}}
+	<div class="row">
+		{{>filterhits}}
+		{{>searching}}
+	</div>
+	<br>
+	<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="false">
+		{{#each hits}}
+			{{> entry}}
+		{{/each}}
 	</div>
 </template>
+
+<!-- Template for a single HTTP action to be displayed inside a bootstrap accordian -->
+<template name="entry">
+	<!-- Accordian div, color coded by HTTP Verb -->
+	<div class="panel {{entryClass}}">
+
+		<!-- Panel Heading, displays URI and time -->
+		<div class="panel-heading" role="tab" id="panel-{{_id}}">
+			<h4 class="panel-title">
+				<div class="row" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}" aria-expanded="true" aria-controls="collapse-{{_id}}">
+					<p class="col-md-6">{{url}}</p>
+					<p class="col-md-4">{{time}}</p>
+					<div class="btn-group col-md-2 pull-right" role="group" aria-label="...">
+  						
+  						<button type="button" class="{{#unless body}}disabled{{/unless}} btn btn-default copy-body btn-copy-body-{{_id}}" data-clipboard-action="copy" data-clipboard-target="#pre-body-{{_id}}">
+  							<span class="glyphicon glyphicon-copy" aria-hidden="true"></span>
+  						</button>
+
+  						<button type="button" class="btn btn-default copy-header btn-copy-header-{{_id}}" data-clipboard-action="copy" data-clipboard-target="#pre-header-{{_id}}">	
+  							<span class="glyphicon glyphicon-header" aria-hidden="true"></span>
+  						</button>
+ 						<button type="button" class="btn btn-danger delete-entry">
+ 							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+ 						</button>
+					</DIV>
+				</div>
+			</h4>
+		</div>
+
+		<!-- Panel body, displays header and body of entry expected in JSON format -->
+		<div id="collapse-{{_id}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="panel-{{_id}}">
+			<div class="panel-body ">
+				<div class="{{#if body}} col-md-6{{else}} col-md-12{{/if}}">
+					<strong>HEADERS:</strong>
+					<pre id="pre-header-{{_id}}">{{json2html headers}}</pre>
+				</div>
+
+				<!-- Don't display the body section if there isn't one -->
+	            {{#if body}} 
+				<div class="col-md-6" style="max-height:14em;">
+					<strong>BODY:</strong>
+					<!-- Copy to clipboard button-->
+					<!-- <button class="btn-copy-body-{{_id}}" data-clipboard-action="copy" data-clipboard-target="#pre{{_id}}">
+						Copy to clipboard
+					</button> -->
+					<!-- Target to copy -->
+					<pre id="pre-body-{{_id}}">{{json2html body}}</pre>
+				</div>
+				{{/if}}
+			</div>
+		</div>
+	</div>    
+</template>
+
+<!-- Template for an inline-list of filter checkboxes -->
+<template name='filterhits'>
+	<div class="col-md-6">
+		<label class="checkbox-inline no-padding-left">
+			<h4>Visibility filter:</h4>
+		</label>
+		<label class="checkbox-inline " >
+		  <input type="checkbox" name="get" checked> GET
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" name="post" checked> POST
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" name="put" checked> PUT
+		</label>
+		<label class="checkbox-inline">
+		  <input type="checkbox" name="delete" checked> DELETE
+		</label>
+	</div>
+</template>
+
+<!-- Template for the URI filter textbox -->
+<template name="searching">
+	 <div class="col-md-6">
+	 	 <input type="text" class="searchinput form-control" placeholder="Type here to filter by URL">
+	 </div>
+</template>
+
