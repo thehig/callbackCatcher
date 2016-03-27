@@ -41,7 +41,7 @@ Template.entry.helpers({
 	},
 	// The HTTP Verb in uppercase
 	action: function() {
-		return JSON.stringify(this.action.toUpperCase());
+		return this.action.toUpperCase();
 	},
 	// Nice time elapsed (eg a few seconds ago)
 	time: function() {
