@@ -48,4 +48,30 @@ if (Meteor.isServer) {
 			insert("delete", this.request);
 			respond(this.response);
 		});
+	//Route to get stored hits by id 
+	//Respond with the stored hit if found. Othewise respond with 404 not found
+	Router.route('/gethit/:_id', {
+			where: "server"
+		})
+		.get(function() {
+			var id = this.params._id;
+
+			var hit = Hits.findOne({
+				"_id": id
+			});
+
+			if (hit) {
+				this.response.setHeader('access-control-allow-origin', '*');
+				this.response.statusCode = 200;
+				this.response.end(JSON.stringify(hit));
+			} else {
+				this.response.setHeader('access-control-allow-origin', '*');
+				this.response.statusCode = 404;
+				this.response.end(JSON.stringify({
+					status: "404",
+					message: "Hit not found."
+				}));
+			}
+		})
+
 }
