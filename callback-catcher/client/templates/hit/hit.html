@@ -22,20 +22,24 @@
 				<div class="row" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse-{{_id}}" aria-expanded="true" aria-controls="collapse-{{_id}}">
 					<button class="btn btn-xs {{entryClass}} col-xs-1">{{action}}</button>
 
-					<p class="col-xs-5 word-wrap-break-word">{{url}}</p>
-					<p class="col-xs-2">{{_id}}</p>
+					<p class="col-xs-7 word-wrap-break-word">{{url}}</p>
 					<p class="col-xs-2">{{time}}</p>
 
 					<!-- Button Bar. Copy Header - Copy Body - Delete -->
 					<div class="btn-group col-md-2 pull-right" role="group" aria-label="...">
-  						
-  						<button type="button" class="btn btn-default btn-xs copy-header btn-copy-header-{{_id}}" 
+  						<button type="button" class="btn btn-default btn-xs stop-prop btn-copy-id-{{_id}}" 
+  								data-clipboard-action="copy" data-clipboard-text="{{_id}}"
+  								title="Copy Id">	
+  							<span class="glyphicon glyphicon-italic" aria-hidden="true"></span>
+  						</button>
+
+  						<button type="button" class="btn btn-default btn-xs stop-prop btn-copy-header-{{_id}}" 
   								data-clipboard-action="copy" data-clipboard-target="#pre-header-{{_id}}"
   								title="Copy Header">	
   							<span class="glyphicon glyphicon-header" aria-hidden="true"></span>
   						</button>
 
-  						<button type="button" class="{{#unless body}}disabled{{/unless}} btn btn-default btn-xs copy-body btn-copy-body-{{_id}}" 
+  						<button type="button" class="{{#unless body}}disabled{{/unless}} btn btn-default btn-xs stop-prop btn-copy-body-{{_id}}" 
   								data-clipboard-action="copy" data-clipboard-target="#pre-body-{{_id}}"
   								title="Copy Body">
   							<span class="glyphicon glyphicon-copy" aria-hidden="true"></span>

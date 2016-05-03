@@ -71,30 +71,53 @@ Template.entry.helpers({
 
 // Set up Copy to Clipboard. Print success and error messages to console
 Template.entry.onRendered(function() {
+	console.log("ON RENDERED");
+
 	var btnCopyBody = ".btn-copy-body-" + this.data._id;
 	var btnCopyHeader = ".btn-copy-header-" + this.data._id;
-	var clipboardBody = new Clipboard(btnCopyBody);
-	var clipboardHeader = new Clipboard(btnCopyHeader);
+	var btnCopyId = ".btn-copy-id-" + this.data._id;
+
+	var headerBtn = document.querySelector(btnCopyHeader);
+	var bodyBtn = document.querySelector(btnCopyBody);
+	var idBtn = document.querySelector(btnCopyId);
+
+	if(!headerBtn || !bodyBtn || !idBtn) {
+		console.error("Couldn't find something");
+		return;
+	}
+
+	var clipboardHeader = new Clipboard(headerBtn);
+
+	clipboardHeader.on('success', function(e) {
+		// console.info('Clipboard Success Action:', e.action);
+		e.clearSelection();
+	});
+
+	clipboardHeader.on('error', function(e) {
+		console.error('Clipboard Error Action:', e.action);
+		console.error('Clipboard Error Trigger:', e.trigger);
+	});
+
+	var clipboardBody = new Clipboard(bodyBtn);
 
 	clipboardBody.on('success', function(e) {
-		console.info('Clipboard Success Action:', e.action);
-		console.log(e);
+		// console.info('Clipboard Success Action:', e.action);
 		e.clearSelection();
-
 	});
 
 	clipboardBody.on('error', function(e) {
 		console.error('Clipboard Error Action:', e.action);
 		console.error('Clipboard Error Trigger:', e.trigger);
-		e.stopPropagation();
 	});
 
-	clipboardHeader.on('success', function(e) {
-		console.info('Clipboard Success Action:', e.action);
+	var clipboardId = new Clipboard(idBtn);
+
+	clipboardId.on('success', function(e) {
+		// console.info('Clipboard Success Action:', e.action);
 		e.clearSelection();
 	});
 
-	clipboardHeader.on('error', function(e) {
+	clipboardId.on('error', function(e) {
 		console.error('Clipboard Error Action:', e.action);
 		console.error('Clipboard Error Trigger:', e.trigger);
 	});
@@ -105,14 +128,9 @@ Template.entry.events({
     Hits.remove(this._id);
     e.stopPropagation();
   },
-  'click .copy-body': function(e, tpl){
+  'click .stop-prop': function(e, tpl){
     e.stopPropagation();
-  },
-  'click .copy-header': function(e, tpl){
-    e.stopPropagation();
-    
   }
-
 });
 
 // FilterHits Template
