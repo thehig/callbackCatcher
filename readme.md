@@ -1,4 +1,4 @@
-# Callback Catcher
+# [Callback Catcher](http://callbackcatcher.meteorapp.com/)
 
 Need to examine a server-side callback but don't want to set up a server? Send your callback to './hits/identifier' and view the JSON object at /.
 
