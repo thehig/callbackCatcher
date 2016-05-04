@@ -60,18 +60,93 @@ if (Meteor.isServer) {
 				"_id": id
 			});
 
+			this.response.setHeader('access-control-allow-origin', '*');
+
 			if (hit) {
-				this.response.setHeader('access-control-allow-origin', '*');
 				this.response.statusCode = 200;
 				this.response.end(JSON.stringify(hit));
 			} else {
-				this.response.setHeader('access-control-allow-origin', '*');
 				this.response.statusCode = 404;
 				this.response.end(JSON.stringify({
 					status: "404",
 					message: "Hit not found."
 				}));
 			}
-		})
+		});
+
+	Router.route('/search/:_query', {where: 'server'})
+		.get(function(){
+
+			// Expected query: cartid=42
+
+			this.response.setHeader('access-control-allow-origin', '*');
+			// Assume server error
+			this.response.statusCode = 500;
+			
+			try
+			{
+				// Check for an '=' separator or error
+				var query = this.params._query.toString();
+				var separator = query.indexOf('=');
+
+				if(!separator || separator == -1){
+					this.response.end(JSON.stringify({
+						status: "500",
+						message: "Invalid query or missing separator", 
+						query: query,
+						separator: separator
+					}));
+					return;
+				}
+
+				var params = query.split('=');
+				
+				// Check for exactly 2 parameters (key, value) or error
+				if(params.length !== 2){
+					this.response.end(JSON.stringify({
+						status: "500",
+						message: "Invalid query or params", 
+						query: query,
+						params: params
+					}));
+					return;
+				}
+
+				// Run the query against the DB for result or error
+				var q = {};
+				// http://stackoverflow.com/questions/17039018/how-to-use-a-variable-as-a-field-name-in-mongodb-native-findone
+				q[params[0]] = params[1];
+				var hit = Hits.findOne(q);
+
+				if(!hit){
+					this.response.statusCode = 404;
+
+					this.response.end(JSON.stringify({
+						status: "404",
+						message: "Unable to locate hit", 
+						query: query,
+						key: params[0],
+						value: params[1]
+					}));
+					return;
+				}
+
+				// Return the result
+				this.response.statusCode = 200;
+				this.response.end(JSON.stringify(hit));
+				return;
+			}
+			catch(err){
+				this.response.statusCode = 500;
+
+				this.response.end(JSON.stringify({
+					status: "500",
+					message: "Internal server error",
+					error: err, 
+					query: query
+				}));
+				return;
+			}
+		});
 
 }
