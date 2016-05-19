@@ -3,6 +3,13 @@ Router.configure({
   layoutTemplate: 'layout'
 });
 
+Router.configureBodyParsers = function() {
+  Router.onBeforeAction(Iron.Router.bodyParser.urlencoded({
+    extended: true,
+    limit: '500mb'
+  }));
+};
+
 // Render the hits template for ./
 Router.route('/', function() {
 	this.render('hits');
